@@ -18,7 +18,8 @@ export const UserStorage = ({ children }) => {
     setLogin(false)
     localStorage.removeItem("token");
     navigate('/conta')
-  }, [navigate])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function getUser(token) {
     const {url, options} = USER_GET(token);
@@ -26,7 +27,6 @@ export const UserStorage = ({ children }) => {
     const json = await response.json();
     setData(json);
     setLogin(true);
-    console.log(json)
   }
 
   async function userLogin(username, password) {
@@ -64,6 +64,8 @@ export const UserStorage = ({ children }) => {
         } finally {
           setLoading(false)
         }
+      } else {
+        setLogin(false)
       }
     }
 
